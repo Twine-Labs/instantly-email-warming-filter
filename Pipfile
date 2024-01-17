@@ -9,8 +9,10 @@ google-auth-oauthlib = "*"
 python-dotenv = "*"
 mysql-connector-python = "*"
 google-api-python-client = "*"
+tqdm = "*"
 
 [dev-packages]
+pyinstaller = "*"
 
 [requires]
 python_version = "3.8"

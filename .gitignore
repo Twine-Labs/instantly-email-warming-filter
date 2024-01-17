@@ -2,3 +2,5 @@
 .env.*
 client_secret.json
 credentials.json
+build/
+dist/
