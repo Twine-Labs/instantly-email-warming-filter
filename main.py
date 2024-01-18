@@ -20,10 +20,10 @@ SCOPES = [
     "openid",
 ]
 
-OBVIOUSLY_INSTANTLY_PATTERN = r".* \| [A-Z0-9]{7} [A-Z0-9]{7}$"
-obviously_instantly_regex = re.compile(OBVIOUSLY_INSTANTLY_PATTERN)
-MAYBE_INSTANTLY_PATTERN = r".*\| .* [A-Z0-9]{7}$"
-maybe_instantly_regex = re.compile(MAYBE_INSTANTLY_PATTERN)
+## CHANGE THIS TO YOUR OWN TAG
+TWINE_TAG = "YCEWFAF"
+
+
 
 FILE_PATH = "credentials.json"
 
@@ -247,17 +247,8 @@ def check_if_message_is_warming(
     headers = message["payload"]["headers"]
     for header in headers:
         if header["name"] == "Subject":
-            if obviously_instantly_regex.match(header["value"]):
+            if TWINE_TAG in (header["value"]):
                 results.append(message_id)
-                return
-            if maybe_instantly_regex.match(header["value"]):
-                matching_string = maybe_instantly_regex.match(header["value"]).group(0)
-                tag = matching_string.split("|")[1].strip()
-                if "parts" in message["payload"] and check_body_for_warming(
-                    message["payload"]["parts"], tag
-                ):
-                    results.append(message_id)
-                    return
                 return
             return
 
